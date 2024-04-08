@@ -1,0 +1,46 @@
+package mobie.example.mobie.entity;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Data
+@EntityListeners(AuditingEntityListener.class)
+public class DiaDiem {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	private String name;
+	
+	private String address;
+	
+	private Date createAt;
+	
+	private Date endAt;
+	
+	private String image;
+	
+	private String descrision;
+	
+	private String supplier_id;
+	
+	//khoa ngoai nam ben bang don dat
+	@OneToMany(mappedBy = "diaDiem")
+	private List<DonDat> donDats;
+	
+	
+	//quan he voi dich dich vu dia diem(khoa phụ nam ben dv_dd)
+	@OneToMany(mappedBy = "diaDiem", cascade = CascadeType.ALL) //khi dia diem xoa thi du lieu bang dv_dd cung xoa
+	private List<DichVu_DiaDiem> dichVu_DiaDiems;
+	
+	
+	//
+	@OneToMany(mappedBy = "diaDiem")
+	private List<NhaCungCap> nhaCungCap;
+}

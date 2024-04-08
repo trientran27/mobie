@@ -36,7 +36,7 @@ Khi công việc hoàn thành trên nhánh của mình, thành viên có thể p
 Thay <tên-nhánh> bằng tên nhánh mà thành viên đã tạo.
 Khi thành viên muốn đóng góp thay đổi vào dự án chính, họ có thể tạo một pull request (PR) từ nhánh của mình vào nhánh chính (thường là main hoặc master) của dự án. Các thành viên khác hoặc quản trị viên dự án có thể xem xét và merge PR đó vào dự án chính.
 
-Lưu ý rằng các bước này giả định rằng bạn và các thành viên đã cài đặt Git và có kiến thức cơ bản về sử dụng nó. Đồng thời, đảm bảo các thành viên có quyền truy cập vào dự án trên GitHub.
+Lưu ý rằng các bước này giả định rằng bạn và các thành viên đã cài đặt Git và có kiến thức cơ bản về sử dụng nó. Đồng thời, đảm bảo các thành viên có quyền truy cập vào dự án trên GitHub. Ngoài ra có thể sử dụng gitdestop
 
 
 

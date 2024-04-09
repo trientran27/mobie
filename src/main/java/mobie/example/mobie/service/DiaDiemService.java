@@ -78,7 +78,7 @@ class DiaDiemServiceImpl implements DiaDiemService{
 	public void delete(int id) {
 		diaDiemRepo.deleteById(id);		
 	}
-
+	//nen hien thi cac danh sách đia điểm đã đặt của sự kiện ở bảng đơn đặt(lấy mỗi tên)
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> getAllSkDat(int id_sk) {
@@ -90,43 +90,43 @@ class DiaDiemServiceImpl implements DiaDiemService{
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchName(@Valid String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.findAllDiaDiemByName("%" + name + "%");
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchStartDate(@Valid Date start) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.searchByDateStart(start);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchEndDate(@Valid Date end) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.searchByDateEnd(end);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchAllDate(@Valid Date start, Date end) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.searchByDate(start, end);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchDv(@Valid List<Integer> id_DichvuDs) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.findDiaDiemsByDichVuIds(id_DichvuDs);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchAll(@Valid String name, Date start, Date end, List<Integer> id_DichvuDs) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DiaDiem> diaDiems = diaDiemRepo.findDiaDiemsByDichVuIds(id_DichvuDs);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 	
 	//convert tu entity sang dto

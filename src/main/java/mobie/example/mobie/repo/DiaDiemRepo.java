@@ -21,15 +21,15 @@ public interface DiaDiemRepo extends JpaRepository<DiaDiem, Integer> {
 	List<DiaDiem> findAllDiaDiemByName(@Param("x") String x);
 	
 	//tim kiem dia diem theo khoang thoi gian bat dau
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt >= :start and d.createAt <= :end")
-	List<DiaDiem> searchByDateStart(@Param("start") Date start, @Param("end") Date end);
+	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt <= :start and d.endAt >= :start")
+	List<DiaDiem> searchByDateStart(@Param("start") Date start);
 	
 	//tim kiem dia diem theo khoang thoi gian ket thuc
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.endAt >= :start and d.endAt <= :end")
-	List<DiaDiem> searchByDateEnd(@Param("start") Date start, @Param("end") Date end);
+	@Query("SELECT d FROM DiaDiem d " + "WHERE d.endAt <= :end and d.endAt >= :end")
+	List<DiaDiem> searchByDateEnd(@Param("end") Date end);
 	
 	//tim kiem dia diem theo khoang thoi gian bat dau va ket thuc
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt >= :start and d.endAt <= :end")
+	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt <= :start and d.endAt >= :end")
 	List<DiaDiem> searchByDate(@Param("start") Date start, @Param("end") Date end);
 
 	

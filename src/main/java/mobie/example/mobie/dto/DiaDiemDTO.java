@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -21,6 +22,9 @@ public class DiaDiemDTO {
 	
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm" , timezone = "Asia/Ho_Chi_Minh")
 	private Date endAt;
+    
+	@Min(0)
+	private int price;
 	
 	private String image;
 	

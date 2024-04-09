@@ -14,8 +14,6 @@ public class DichVu_DiaDiem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private int price;
-	
 	@ManyToOne
 	private DichVu dichVu;
 	

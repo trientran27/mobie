@@ -24,6 +24,8 @@ public class DiaDiem {
 	
 	private Date endAt;
 	
+	private int price;
+	
 	private String image;
 	
 	private String descrision;

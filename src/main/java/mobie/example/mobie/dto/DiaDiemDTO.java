@@ -26,8 +26,6 @@ public class DiaDiemDTO {
 	@Min(0)
 	private int price;
 	
-	private String image;
-	
 	private String descrision;
 	
 	private String supplier_id;

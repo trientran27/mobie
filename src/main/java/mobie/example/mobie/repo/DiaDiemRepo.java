@@ -11,9 +11,9 @@ import mobie.example.mobie.entity.DiaDiem;
 
 public interface DiaDiemRepo extends JpaRepository<DiaDiem, Integer> {
 	
-	//tim kiem dia diem da dat theo su kien
-	@Query("SELECT d FROM DiaDiem as d JOIN DonDat as dd ON dd.diaDiem.id = d.id WHERE dd.suKien.id = :Id_suKien")
-    List<DiaDiem> findAllDiaDiemDaDatBySuKien(@Param("Id_suKien") Integer Id_suKien);
+	//tim kiem dia diem da dat theo don dat
+	@Query("SELECT d.diaDiem FROM DonDat d WHERE d.id = :donDatId")
+    DiaDiem findByDonDatId(@Param("donDatId") Integer donDatId);
 	
 	
 	//tim kiem dia diem theo ten

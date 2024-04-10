@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.NoResultException;
 import jakarta.validation.Valid;
 import mobie.example.mobie.dto.DiaDiemDTO;
 import mobie.example.mobie.entity.DiaDiem;
@@ -22,8 +23,12 @@ public interface DiaDiemService {
 	
 	void delete(int id);
 	
-	//danh sach dia diem dat theo su kien
-	List<DiaDiemDTO> getAllSkDat(int id_sk);
+	DiaDiemDTO getById(int id);
+	
+	List<DiaDiemDTO> getAll();
+	
+	//dia diem theo don dat
+	DiaDiemDTO getByIdDd(int id_dd);
 	
 	//tim kiem dia diem theo ten
 	List<DiaDiemDTO> searchName(@Valid String name);
@@ -44,11 +49,13 @@ public interface DiaDiemService {
 	List<DiaDiemDTO> searchAll(@Valid String name, Date start, Date end, List<Integer> id_DichvuDs);
 	
 }
+
+
 @Service
 class DiaDiemServiceImpl implements DiaDiemService{
 	
 	@Autowired
-	private DiaDiemRepo diaDiemRepo;
+	DiaDiemRepo diaDiemRepo;
 
 	@Override
 	@Transactional
@@ -78,13 +85,21 @@ class DiaDiemServiceImpl implements DiaDiemService{
 	public void delete(int id) {
 		diaDiemRepo.deleteById(id);		
 	}
+	
+	@Override
+	@Transactional
+	public List<DiaDiemDTO> getAll(){
+		List<DiaDiem> diaDiems = diaDiemRepo.findAll();
+		
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
+	}
 	//nen hien thi cac danh sách đia điểm đã đặt của sự kiện ở bảng đơn đặt(lấy mỗi tên)
 	@Override
 	@Transactional
-	public List<DiaDiemDTO> getAllSkDat(int id_sk) {
+	public DiaDiemDTO getByIdDd(int id_dd) {
 		
-		List<DiaDiem> diaDiems = diaDiemRepo.findAllDiaDiemDaDatBySuKien(id_sk);
-		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
+		DiaDiem diaDiem = diaDiemRepo.findByDonDatId(id_dd); 
+		return convert(diaDiem);
 	}
 
 	@Override
@@ -125,7 +140,7 @@ class DiaDiemServiceImpl implements DiaDiemService{
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchAll(@Valid String name, Date start, Date end, List<Integer> id_DichvuDs) {
-		List<DiaDiem> diaDiems = diaDiemRepo.findDiaDiemsByDichVuIds(id_DichvuDs);
+		List<DiaDiem> diaDiems = diaDiemRepo.searchDiaDiemByCriteria(name, id_DichvuDs, start, end);
 		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 	
@@ -134,5 +149,12 @@ class DiaDiemServiceImpl implements DiaDiemService{
 		ModelMapper  modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);	//dam bao du lieu duoc gen chuan
 		return modelMapper.map(diaDiem, DiaDiemDTO.class);
+	}
+
+	@Override
+	@Transactional
+	public DiaDiemDTO getById(int id) {
+		DiaDiem diaDiem = diaDiemRepo.findById(id).orElseThrow(NoResultException :: new);
+		return convert(diaDiem);
 	}
 }

@@ -26,8 +26,6 @@ public class DiaDiem {
 	
 	private int price;
 	
-	private String image;
-	
 	private String descrision;
 	
 	private String supplier_id;
@@ -42,6 +40,9 @@ public class DiaDiem {
 	private List<DichVu_DiaDiem> dichVu_DiaDiems;
 	
 	
+	//khoa phu nam tai image
+	@OneToMany(mappedBy = "diaDiem", cascade = CascadeType.ALL)
+	private List<Image> images;
 	//
 	@OneToMany(mappedBy = "diaDiem")
 	private List<NhaCungCap> nhaCungCap;

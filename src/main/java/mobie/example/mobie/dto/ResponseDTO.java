@@ -19,7 +19,7 @@ public class ResponseDTO<T> {
 	private String msg;
 	
 	@JsonInclude(Include.NON_NULL)
-	private String data;
+	private T data;
 	
 	public ResponseDTO(int code, String msg) {
 		super();

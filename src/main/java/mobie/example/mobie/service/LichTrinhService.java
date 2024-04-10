@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.NoResultException;
 import mobie.example.mobie.dto.LichTrinhDTO;
 import mobie.example.mobie.entity.LichTrinh;
 import mobie.example.mobie.repo.LichTrinhRepo;
@@ -20,13 +21,15 @@ public interface LichTrinhService {
 	
 	void delete(int id);
 	
+	LichTrinhDTO getById(int id);
+	
 	List<LichTrinhDTO> getAllByIdSk(int id_sk);
 }
 
 @Service
 class LichTrinhServiceImpl implements LichTrinhService{
 	@Autowired
-	private LichTrinhRepo lichTrinhRepo;
+	LichTrinhRepo lichTrinhRepo;
 
 	@Override
 	@Transactional
@@ -60,7 +63,6 @@ class LichTrinhServiceImpl implements LichTrinhService{
 	@Transactional
 	public List<LichTrinhDTO> getAllByIdSk(int id_sk) {
 		
-		
 		List<LichTrinh> lichTrinhs = lichTrinhRepo.findBySuKienId(id_sk);
 		return lichTrinhs.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
@@ -70,6 +72,13 @@ class LichTrinhServiceImpl implements LichTrinhService{
 		ModelMapper  modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);	//dam bao du lieu duoc gen chuan
 		return modelMapper.map(lichTrinh, LichTrinhDTO.class);
+	}
+
+	@Override
+	@Transactional
+	public LichTrinhDTO getById(int id) {
+		LichTrinh lichTrinh = lichTrinhRepo.findById(id).orElseThrow(NoResultException :: new);
+		return convert(lichTrinh);
 	}
 	
 }

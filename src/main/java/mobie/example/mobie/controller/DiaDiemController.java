@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import mobie.example.mobie.dto.DiaDiemDTO;
-import mobie.example.mobie.dto.ImageDTO;
 import mobie.example.mobie.dto.ResponseDTO;
 import mobie.example.mobie.service.DiaDiemService;
 import mobie.example.mobie.service.ImageService;
@@ -51,13 +50,14 @@ public class DiaDiemController {
 		return ResponseDTO.<DiaDiemDTO>builder().code(200).data(diaDiemService.getById(id)).build();
 	}
 	
-	//get lich trinh theo sk
+	//get lich trinh theo dd
 	@GetMapping("/listImage/{id}")
-	public ResponseDTO<List<ImageDTO>> listLt(@PathVariable("id") int id){
-		List<ImageDTO> imageDTOs = imageService.getAll(id);
+	public ResponseDTO<List<String>> listLt(@PathVariable("id") int id){
+		List<String> imageURLs = imageService.getAll(id);
 		
-		return ResponseDTO.<List<ImageDTO>>builder().code(200).data(imageDTOs).build();
+		return ResponseDTO.<List<String>>builder().code(200).data(imageURLs).build();
 	}
+	
 	
 	 
 	

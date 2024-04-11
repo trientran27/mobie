@@ -12,5 +12,5 @@ public interface ImageRepo extends JpaRepository<Image, Integer> {
 	
 	//in danh sach lich trinh tao cho su kien
 	@Query("SELECT i.imageURL FROM Image i WHERE i.diaDiem.id = :diaDiemId")
-	List<Image> findImagesByDiaDiemId(@Param("diaDiemId") Integer diaDiemId);
+	List<String> findImagesByDiaDiemId(@Param("diaDiemId") Integer diaDiemId);
 }

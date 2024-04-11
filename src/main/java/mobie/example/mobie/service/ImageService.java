@@ -1,10 +1,8 @@
 package mobie.example.mobie.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +17,7 @@ public interface ImageService {
 	
 	void delete(int id);
 	
-	List<ImageDTO> getAll(int id_dd);
+	List<String> getAll(int id_dd);
 }
 
 @Service
@@ -44,15 +42,15 @@ class ImageServiceImpl implements ImageService{
 
 	@Override
 	@Transactional
-	public List<ImageDTO> getAll(int id_dd) {
-		List<Image> images = imageRepo.findImagesByDiaDiemId(id_dd);
-		return images.stream().map(c -> convert(c)).collect(Collectors.toList());
+	public List<String> getAll(int id_dd) {
+		List<String> images = imageRepo.findImagesByDiaDiemId(id_dd);
+		return images;
 	}
 	
 	//convert tu entity sang dto
-	private ImageDTO convert(Image image) {
-		ModelMapper  modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);	//dam bao du lieu duoc gen chuan
-		return modelMapper.map(image, ImageDTO.class);
-	}
+//	private ImageDTO convert(Image image) {
+//		ModelMapper  modelMapper = new ModelMapper();
+//		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);	//dam bao du lieu duoc gen chuan
+//		return modelMapper.map(image, ImageDTO.class);
+//	}
 }

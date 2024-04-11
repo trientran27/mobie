@@ -20,7 +20,7 @@ public class MobieApplication {
 				
 				"cloud_name", "dulramupj",
 				"api_key", "854114746725916",
-				"api_secret", "***************************",
+				"api_secret", "rzpp70b3NRu8KCT0LCieJYXeAJ0",
 				"secure",true
 				));
 		

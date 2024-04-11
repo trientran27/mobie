@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import mobie.example.mobie.dto.DonDatDTO;
+import mobie.example.mobie.entity.DiaDiem;
 import mobie.example.mobie.entity.DonDat;
+import mobie.example.mobie.repo.DiaDiemRepo;
 import mobie.example.mobie.repo.DonDatRepo;
 
 public interface DonDatService {
@@ -27,10 +29,18 @@ class DonDatServiceImpl implements DonDatService{
 	@Autowired
 	DonDatRepo donDatRepo;
 	
+	@Autowired
+	DiaDiemRepo diaDiemRepo;
+	
 	@Override
 	@Transactional
 	public void create(DonDatDTO donDatDTO) {
 		DonDat donDat = new ModelMapper().map(donDatDTO, DonDat.class);
+		
+		DiaDiem diaDiem = diaDiemRepo.findById(donDat.getDiaDiem().getId()).orElse(null);
+		
+		donDat.setTongGia(diaDiem.getPrice());
+		
 		donDatRepo.save(donDat);
 		
 	}

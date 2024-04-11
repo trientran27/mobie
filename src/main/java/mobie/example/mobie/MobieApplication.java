@@ -2,13 +2,20 @@ package mobie.example.mobie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
 @SpringBootApplication
-public class MobieApplication {
+@EnableJpaAuditing
+@EnableScheduling
+@EnableCaching
+public class MobieApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MobieApplication.class, args);

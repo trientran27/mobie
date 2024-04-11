@@ -74,6 +74,13 @@
 		    <artifactId>cloudinary-http44</artifactId>
 		    <version>1.35.0</version>
 		</dependency>
+		
+		<!--SWAGGER-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.11</version>
+		</dependency>
 
 		
 	</dependencies>

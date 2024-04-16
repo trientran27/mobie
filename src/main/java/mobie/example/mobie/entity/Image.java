@@ -1,6 +1,6 @@
 package mobie.example.mobie.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity

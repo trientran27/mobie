@@ -3,13 +3,15 @@ package mobie.example.mobie.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.NoResultException;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.NoResultException;
+
 import mobie.example.mobie.dto.LichTrinhDTO;
 import mobie.example.mobie.entity.LichTrinh;
 import mobie.example.mobie.repo.LichTrinhRepo;
@@ -48,6 +50,7 @@ class LichTrinhServiceImpl implements LichTrinhService{
 			lichTrinh.setName(lichTrinhDTO.getName());
 			lichTrinh.setCreateAt(lichTrinhDTO.getCreateAt());
 			lichTrinh.setEndAt(lichTrinhDTO.getEndAt());
+			lichTrinh.setDescrision(lichTrinhDTO.getDescrision());
 			
 			lichTrinhRepo.save(lichTrinh);
 		}

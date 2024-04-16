@@ -1,6 +1,7 @@
 package mobie.example.mobie.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Data;
 
 @Data

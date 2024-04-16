@@ -1,7 +1,8 @@
 package mobie.example.mobie.dto;
 
 
-import jakarta.validation.constraints.Min;
+import javax.validation.constraints.Min;
+
 import lombok.Data;
 
 @Data

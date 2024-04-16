@@ -3,6 +3,8 @@ package mobie.example.mobie.controller;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
-import jakarta.validation.Valid;
 import mobie.example.mobie.dto.ImageDTO;
 import mobie.example.mobie.dto.ResponseDTO;
 import mobie.example.mobie.service.ImageService;

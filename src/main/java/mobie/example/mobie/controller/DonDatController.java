@@ -44,7 +44,7 @@ public class DonDatController {
 //	}
 	
 	//get dia diem theo id don dat
-	@GetMapping("/{id}")
+	@GetMapping("/diadiem/{id}")
 	public ResponseDTO<DiaDiemDTO> get(@PathVariable("id") int id){
 		return ResponseDTO.<DiaDiemDTO>builder().code(200).data(diaDiemService.getByIdDd(id)).build();
 	}

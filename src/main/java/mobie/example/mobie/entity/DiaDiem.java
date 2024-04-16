@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -20,6 +20,10 @@ public class DiaDiem {
 	
 	private String address;
 	
+	private String latitude; //vi do
+	
+	private String longitude; //kinh do
+	
 	private Date createAt;
 	
 	private Date endAt;
@@ -27,8 +31,6 @@ public class DiaDiem {
 	private int price;
 	
 	private String descrision;
-	
-	private String supplier_id;
 	
 	//khoa ngoai nam ben bang don dat
 	@OneToMany(mappedBy = "diaDiem")

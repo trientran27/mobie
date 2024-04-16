@@ -50,7 +50,7 @@ public class DiaDiemController {
 		return ResponseDTO.<DiaDiemDTO>builder().code(200).data(diaDiemService.getById(id)).build();
 	}
 	
-	//get lich trinh theo dd
+	//get anh theo dd
 	@GetMapping("/listImage/{id}")
 	public ResponseDTO<List<String>> listLt(@PathVariable("id") int id){
 		List<String> imageURLs = imageService.getAll(id);
@@ -67,7 +67,7 @@ public class DiaDiemController {
 //		
 //		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
 //	}
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public ResponseDTO<List<DiaDiemDTO>> search(@RequestParam(required = false) String name,
 	                                            @RequestParam(required = false) Date start,
 	                                            @RequestParam(required = false) Date end,

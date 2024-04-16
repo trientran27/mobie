@@ -2,9 +2,10 @@ package mobie.example.mobie.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

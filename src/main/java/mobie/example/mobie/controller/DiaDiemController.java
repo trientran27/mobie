@@ -1,5 +1,7 @@
 package mobie.example.mobie.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import mobie.example.mobie.service.ImageService;
 @RestController
 @RequestMapping("/diadiem")
 public class DiaDiemController {
+    
 	@Autowired
 	DiaDiemService diaDiemService;
 	
@@ -67,17 +70,34 @@ public class DiaDiemController {
 //		
 //		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
 //	}
+	
+    // Định nghĩa định dạng ngày tháng
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 	@PostMapping("/search")
 	public ResponseDTO<List<DiaDiemDTO>> search(@RequestParam(required = false) String name,
-	                                            @RequestParam(required = false) Date start,
-	                                            @RequestParam(required = false) Date end,
-	                                            @RequestParam(required = false) List<Integer> id_DichvuDs) {
+	                                            @RequestParam(required = false) String startDate,
+	                                            @RequestParam(required = false) String endDate,
+	                                            @RequestParam(required = false) List<Integer> id_DichvuDs) throws ParseException {
 	    List<DiaDiemDTO> result;
+	    
+	    // Chuyển đổi các tham số ngày tháng từ String sang Date
+        Date start = null;
+        Date end = null;
+        if (startDate != null) {
+            start = DATE_FORMAT.parse(startDate);
+        }
+        if (endDate != null) {
+            end = DATE_FORMAT.parse(endDate);
+        }
 	    
 	    if(name == null && start == null && end == null && (id_DichvuDs == null || id_DichvuDs.isEmpty())) {
 	    	result = diaDiemService.getAll();
 	    }else {
-			result = diaDiemService.searchAll(name, start, end, id_DichvuDs);
+	    	if(id_DichvuDs == null || id_DichvuDs.isEmpty()) {
+	    		result = diaDiemService.searchAllNotList(name, start, end);
+	    	}else {
+	    		result = diaDiemService.searchAll(name, start, end, id_DichvuDs);
+	    	}
 		}
 
 	    return ResponseDTO.<List<DiaDiemDTO>>builder().code(HttpStatus.OK.value()).data(result).build();

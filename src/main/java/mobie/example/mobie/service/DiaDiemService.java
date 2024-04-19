@@ -32,29 +32,19 @@ public interface DiaDiemService {
 	//dia diem theo don dat
 	DiaDiemDTO getByIdDd(int id_dd);
 	
-	//tim kiem dia diem theo ten
-	List<DiaDiemDTO> searchName(@Valid String name);
-	
-	//tim kiem theo thoi gian bat dau
-	List<DiaDiemDTO> searchStartDate(@Valid Date start);
-	
-	//tim kiem thoi gian ket thuc
-	List<DiaDiemDTO> searchEndDate(@Valid Date end);
-	
-	//tim kiem khoang thoi gian
-	List<DiaDiemDTO> searchAllDate(@Valid Date start, Date end);
-	
-	//tim kiem theo dich vu
-	List<DiaDiemDTO> searchDv(@Valid List<Integer> id_DichvuDs);
+	//tim kiem khi list null
+	List<DiaDiemDTO> searchAllNotList(@Valid String name, Date start, Date end);
+
 	
 	//tim kiem tong hop
 	List<DiaDiemDTO> searchAll(@Valid String name, Date start, Date end, List<Integer> id_DichvuDs);
-	
+		
 }
 
 
 @Service
 class DiaDiemServiceImpl implements DiaDiemService{
+
 	
 	@Autowired
 	DiaDiemRepo diaDiemRepo;
@@ -103,48 +93,26 @@ class DiaDiemServiceImpl implements DiaDiemService{
 		DiaDiem diaDiem = diaDiemRepo.findByDonDatId(id_dd); 
 		return convert(diaDiem);
 	}
-
+	
+	
 	@Override
 	@Transactional
-	public List<DiaDiemDTO> searchName(@Valid String name) {
-		List<DiaDiem> diaDiems = diaDiemRepo.findAllDiaDiemByName("%" + name + "%");
-		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<DiaDiemDTO> searchStartDate(@Valid Date start) {
-		List<DiaDiem> diaDiems = diaDiemRepo.searchByDateStart(start);
-		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<DiaDiemDTO> searchEndDate(@Valid Date end) {
-		List<DiaDiem> diaDiems = diaDiemRepo.searchByDateEnd(end);
-		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<DiaDiemDTO> searchAllDate(@Valid Date start, Date end) {
-		List<DiaDiem> diaDiems = diaDiemRepo.searchByDate(start, end);
-		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<DiaDiemDTO> searchDv(@Valid List<Integer> id_DichvuDs) {
-		List<DiaDiem> diaDiems = diaDiemRepo.findDiaDiemsByDichVuIds(id_DichvuDs);
+	public List<DiaDiemDTO> searchAllNotList(@Valid String name, Date start, Date end) {
+		List<DiaDiem> diaDiems = diaDiemRepo.searchDiaDiemByNotList(name, start, end);
 		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<DiaDiemDTO> searchAll(@Valid String name, Date start, Date end, List<Integer> id_DichvuDs) {
-		List<DiaDiem> diaDiems = diaDiemRepo.searchDiaDiemByCriteria(name, id_DichvuDs, start, end);
+		long number = 0;
+		if(id_DichvuDs!=null) {
+			number = id_DichvuDs.size();
+		}
+		List<DiaDiem> diaDiems = diaDiemRepo.searchDiaDiemByCriteria(name, id_DichvuDs, start, end, number);
 		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
+
 	
 	//convert tu entity sang dto
 	private DiaDiemDTO convert(DiaDiem diaDiem) {

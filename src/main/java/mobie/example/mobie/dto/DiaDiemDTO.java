@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -22,10 +22,11 @@ public class DiaDiemDTO {
 	
 	private String longitude; //kinh do
 	
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm" , timezone = "Asia/Ho_Chi_Minh")
+	//@JsonFormat(pattern = "dd/MM/yyyy HH:mm" , timezone = "Asia/Ho_Chi_Minh")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date createAt;
 	
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm" , timezone = "Asia/Ho_Chi_Minh")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date endAt;
     
 	@Min(0)

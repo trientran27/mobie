@@ -16,43 +16,31 @@ public interface DiaDiemRepo extends JpaRepository<DiaDiem, Integer> {
     DiaDiem findByDonDatId(@Param("donDatId") Integer donDatId);
 	
 	
-	//tim kiem dia diem theo ten
-	@Query("SELECT d FROM DiaDiem d WHERE d.name LIKE :x ")
-	List<DiaDiem> findAllDiaDiemByName(@Param("x") String x);
+//	 tim kiem cac truong khong phai la danh sach
+	@Query("SELECT d FROM DiaDiem d WHERE (:name IS NULL OR d.name LIKE %:name%) " +
+		       "AND (:start IS NULL OR d.createAt <= :start) " +
+		       "AND (:end IS NULL OR d.endAt >= :end)")
+	 List<DiaDiem> searchDiaDiemByNotList(@Param("name") String name, @Param("start") Date start, @Param("end") Date end);
+		
 	
-	//tim kiem dia diem theo khoang thoi gian bat dau
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt <= :start and d.endAt >= :start")
-	List<DiaDiem> searchByDateStart(@Param("start") Date start);
-	
-	//tim kiem dia diem theo khoang thoi gian ket thuc
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.endAt <= :end and d.endAt >= :end")
-	List<DiaDiem> searchByDateEnd(@Param("end") Date end);
-	
-	//tim kiem dia diem theo khoang thoi gian bat dau va ket thuc
-	@Query("SELECT d FROM DiaDiem d " + "WHERE d.createAt <= :start and d.endAt >= :end")
-	List<DiaDiem> searchByDate(@Param("start") Date start, @Param("end") Date end);
-
-	
-	//tim kiem dia diem theo dich vụ dia diem
-	@Query("SELECT d FROM DiaDiem d " +
-			"JOIN DichVu_DiaDiem dvd ON d.id = dvd.diaDiem.id " +
-			"JOIN DichVu dv ON dvd.dichVu.id = dv.id " +
-			"WHERE dv.id IN :dichVuIds")
-	List<DiaDiem> findDiaDiemsByDichVuIds(@Param("dichVuIds") List<Integer> dichVuIds);
-
-	//tong hop
-	@Query("SELECT d FROM DiaDiem d " +
-	        "JOIN DichVu_DiaDiem dvd ON d.id = dvd.diaDiem.id " +
-	        "JOIN DichVu dv ON dvd.dichVu.id = dv.id " +
-	        "WHERE d.name LIKE :name " +
-	        "AND dv.id IN :dichVuIds " +
-	        "AND (d.createAt BETWEEN :start AND :end) " +
-	        "AND (d.endAt BETWEEN :start AND :end)")
+	//tong hơp
+	@Query("SELECT DISTINCT d " +
+		       "FROM DiaDiem d " +
+		       "JOIN DichVu_DiaDiem dvd ON d.id = dvd.diaDiem.id " +
+		       "JOIN dvd.dichVu dv " +
+		       "WHERE (:name IS NULL OR d.name LIKE %:name%) " +
+		       "AND (:start IS NULL OR d.createAt <= :start) " +
+		       "AND (:end IS NULL OR d.endAt >= :end) " +
+		       "AND dv.id IN :id_DichvuDs " +
+		       "GROUP BY d.id " +
+		       "HAVING COUNT(DISTINCT dvd.dichVu.id) = :number")
 	List<DiaDiem> searchDiaDiemByCriteria(
 	        @Param("name") String name,
-	        @Param("dichVuIds") List<Integer> dichVuIds,
+	        @Param("id_DichvuDs") List<Integer> id_DichvuDs,
 	        @Param("start") Date start,
-	        @Param("end") Date end);
-
+	        @Param("end") Date end,
+	        @Param("number") Long number);
+	
+ 
 	
 }

@@ -21,6 +21,8 @@ public interface DonDatService {
 	void delete(int id);
 	
 	List<DonDatDTO> getList(int id_sk);
+	
+	Integer getPricePlus(int id_sk);
 }
 
 @Service
@@ -64,6 +66,12 @@ class DonDatServiceImpl implements DonDatService{
 		ModelMapper  modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);	//dam bao du lieu duoc gen chuan
 		return modelMapper.map(donDat, DonDatDTO.class);
+	}
+
+	@Override
+	public Integer getPricePlus(int id_sk) {
+		
+		return donDatRepo.calculateTotalPriceBySuKienId(id_sk);
 	}
 	
 }

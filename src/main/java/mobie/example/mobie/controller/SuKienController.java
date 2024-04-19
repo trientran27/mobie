@@ -54,4 +54,9 @@ public class SuKienController {
 		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
 	}
 	
+	//get tong gia dơn dat của su kien
+	@GetMapping("/totalsum/{id}")
+	public ResponseDTO<Integer> totalsumDonDat(@PathVariable("id") int id){
+		return ResponseDTO.<Integer>builder().code(200).data(donDatService.getPricePlus(id)).build();
+	}
 }

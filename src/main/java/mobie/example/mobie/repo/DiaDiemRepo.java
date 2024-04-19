@@ -15,8 +15,13 @@ public interface DiaDiemRepo extends JpaRepository<DiaDiem, Integer> {
 	@Query("SELECT d.diaDiem FROM DonDat d WHERE d.id = :donDatId")
     DiaDiem findByDonDatId(@Param("donDatId") Integer donDatId);
 	
+	//danh sach dia diem theo id sk
+	//@Query("SELECT DISTINCT dd FROM DiaDiem dd JOIN DonDat dd WHERE dd.suKien.id = :eventId")
+	@Query("SELECT d.diaDiem FROM DonDat d WHERE d.suKien.id = :suKienId")
+    List<DiaDiem> findDiaDiemBySuKienId(@Param("suKienId") Integer suKienId);
 	
-//	 tim kiem cac truong khong phai la danh sach
+	
+	//	 tim kiem cac truong khong phai la danh sach
 	@Query("SELECT d FROM DiaDiem d WHERE (:name IS NULL OR d.name LIKE %:name%) " +
 		       "AND (:start IS NULL OR d.createAt <= :start) " +
 		       "AND (:end IS NULL OR d.endAt >= :end)")

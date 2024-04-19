@@ -32,6 +32,9 @@ public interface DiaDiemService {
 	//dia diem theo don dat
 	DiaDiemDTO getByIdDd(int id_dd);
 	
+	//dia diem theo id sk
+	List<DiaDiemDTO> getByIdSk(int id_sk);
+	
 	//tim kiem khi list null
 	List<DiaDiemDTO> searchAllNotList(@Valid String name, Date start, Date end);
 
@@ -94,6 +97,14 @@ class DiaDiemServiceImpl implements DiaDiemService{
 		return convert(diaDiem);
 	}
 	
+
+	@Override
+	@Transactional
+	public List<DiaDiemDTO> getByIdSk(int id_sk) {
+		List<DiaDiem> diaDiems = diaDiemRepo.findDiaDiemBySuKienId(id_sk);
+		return diaDiems.stream().map(c -> convert(c)).collect(Collectors.toList());
+	}
+	
 	
 	@Override
 	@Transactional
@@ -127,4 +138,5 @@ class DiaDiemServiceImpl implements DiaDiemService{
 		DiaDiem diaDiem = diaDiemRepo.findById(id).orElseThrow(NoResultException :: new);
 		return convert(diaDiem);
 	}
+
 }

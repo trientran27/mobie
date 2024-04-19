@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import mobie.example.mobie.dto.DiaDiemDTO;
 import mobie.example.mobie.dto.DonDatDTO;
 import mobie.example.mobie.dto.LichTrinhDTO;
 import mobie.example.mobie.dto.ResponseDTO;
+import mobie.example.mobie.service.DiaDiemService;
 import mobie.example.mobie.service.DonDatService;
 import mobie.example.mobie.service.LichTrinhService;
 
@@ -23,6 +25,9 @@ public class SuKienController {
 	
 	@Autowired
 	LichTrinhService lichTrinhService;
+	
+	@Autowired
+	DiaDiemService diaDiemService;
 	
 	//get don dat theo su kien
 
@@ -40,4 +45,13 @@ public class SuKienController {
 		
 		return ResponseDTO.<List<LichTrinhDTO>>builder().code(200).data(lichTrinhDTOs).build();
 	}
+	
+	//get dia diem theo id_sk
+	@GetMapping("/listddiem/{id}")
+	public ResponseDTO<List<DiaDiemDTO>> listDdiem(@PathVariable("id") int id){
+		List<DiaDiemDTO> diaDiemDTOs = diaDiemService.getByIdSk(id);
+		
+		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
+	}
+	
 }

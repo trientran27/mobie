@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

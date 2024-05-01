@@ -1,6 +1,7 @@
 package mobie.example.mobie.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -32,6 +33,8 @@ public class DiaDiemDTO {
     
 	@Min(0)
 	private int price;
+	
+	private List<String> imageURLs;
 	
 	private String descrision;
 	

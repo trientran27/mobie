@@ -38,4 +38,5 @@ public class DiaDiemDTO {
 	
 	private String descrision;
 	
+	private NhaCungCapDTO nhaCungCap;
 }

@@ -46,6 +46,7 @@ public class DiaDiem {
 	@OneToMany(mappedBy = "diaDiem", cascade = CascadeType.ALL)
 	private List<Image> images;
 	//
-	@OneToMany(mappedBy = "diaDiem")
-	private List<NhaCungCap> nhaCungCap;
+	@ManyToOne
+	private NhaCungCap nhaCungCap;
+	
 }

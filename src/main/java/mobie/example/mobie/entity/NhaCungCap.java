@@ -1,6 +1,8 @@
 package mobie.example.mobie.entity;
 
 
+import java.util.List;
+
 import javax.persistence.*;
 import lombok.Data;
 
@@ -11,6 +13,8 @@ public class NhaCungCap {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne
-	private DiaDiem diaDiem;
+	private String name;
+	
+	@OneToMany(mappedBy = "nhaCungCap")
+	private List<DiaDiem> diaDiems;
 }

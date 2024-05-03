@@ -1,5 +1,7 @@
 package mobie.example.mobie.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,12 @@ public class DonDatController {
 	@PostMapping("/create")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseDTO<DonDatDTO> create(@RequestBody DonDatDTO donDatDTO){
+		
+		List<DonDatDTO> donDatDTOs = donDatService.getBySkAndDdiem(donDatDTO.getDiaDiem().getId(), donDatDTO.getSuKien().getId());
+		
+		if(!donDatDTOs.isEmpty()) {
+			return ResponseDTO.<DonDatDTO>builder().code(400).msg("Dia diem da duoc dat cho su kien!").build();
+		}
 		donDatService.create(donDatDTO);
 		
 		//tra ve lic trinh dto voi id moi

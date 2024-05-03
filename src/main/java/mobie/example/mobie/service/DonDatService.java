@@ -20,6 +20,8 @@ public interface DonDatService {
 	
 	void delete(int id);
 	
+	List<DonDatDTO> getBySkAndDdiem(int id_ddiem, int id_sk);
+	
 	List<DonDatDTO> getList(int id_sk);
 	
 	Integer getPricePlus(int id_sk);
@@ -61,6 +63,14 @@ class DonDatServiceImpl implements DonDatService{
 		return donDats.stream().map(c -> convert(c)).collect(Collectors.toList());
 	}
 	
+	@Override
+	@Transactional
+	public List<DonDatDTO> getBySkAndDdiem(int id_ddiem, int id_sk) {
+		
+		List<DonDat> donDats = donDatRepo.findByDiaDiemIdAndSuKienId(id_ddiem, id_sk);
+		return donDats.stream().map(c -> convert(c)).collect(Collectors.toList());
+	}
+	
 	//convert tu entity sang dto
 	private DonDatDTO convert(DonDat donDat) {
 		ModelMapper  modelMapper = new ModelMapper();
@@ -69,9 +79,12 @@ class DonDatServiceImpl implements DonDatService{
 	}
 
 	@Override
+	@Transactional
 	public Integer getPricePlus(int id_sk) {
 		
 		return donDatRepo.calculateTotalPriceBySuKienId(id_sk);
 	}
+
+	
 	
 }

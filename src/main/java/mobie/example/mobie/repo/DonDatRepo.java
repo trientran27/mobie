@@ -17,4 +17,9 @@ public interface DonDatRepo extends JpaRepository<DonDat, Integer> {
 	//tổng tiền của các đơn đặt theo sk
 	@Query("SELECT SUM(d.tongGia) FROM DonDat d WHERE d.suKien.id = :suKienId")
 	Integer calculateTotalPriceBySuKienId(@Param("suKienId") Integer suKienId);
+	
+	//tim kiem don dat dia diem cua su kien da co hay chưa
+	@Query("SELECT d FROM DonDat d WHERE d.diaDiem.id = :diaDiemId AND d.suKien.id = :suKienId")
+    List<DonDat> findByDiaDiemIdAndSuKienId(@Param("diaDiemId") Integer diaDiemId, @Param("suKienId") Integer suKienId);
+    
 }

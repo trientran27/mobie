@@ -46,12 +46,21 @@ public class SuKienController {
 		return ResponseDTO.<List<LichTrinhDTO>>builder().code(200).data(lichTrinhDTOs).build();
 	}
 	
-	//get dia diem theo id_sk
+	//get dia diem theo id_sk cho guest
 	@GetMapping("/listddiem/{id}")
-	public ResponseDTO<List<DiaDiemDTO>> listDdiem(@PathVariable("id") int id){
+	public List<DiaDiemDTO> listDdiem(@PathVariable("id") int id){
 		List<DiaDiemDTO> diaDiemDTOs = diaDiemService.getByIdSk(id);
 		
-		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
+//		return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
+		return diaDiemDTOs;
+	}
+	
+	//get dia diem theo id_sk
+	@GetMapping("/listddiem2/{id}")
+	public ResponseDTO<List<DiaDiemDTO> > listDdiem2(@PathVariable("id") int id){
+		List<DiaDiemDTO> diaDiemDTOs = diaDiemService.getByIdSk(id);
+			
+			return ResponseDTO.<List<DiaDiemDTO>>builder().code(200).data(diaDiemDTOs).build();
 	}
 	
 	//get tong gia dơn dat của su kien

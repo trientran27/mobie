@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import mobie.example.mobie.dto.MailDTO;
+import mobie.example.mobie.dto.ResponseDTO;
 import mobie.example.mobie.service.EmailService;
 
 @RestController
@@ -20,12 +21,13 @@ public class KhachmoiController {
     private EmailService emailService;
 
     @PostMapping("/sendMail")
-    public void sendScheduleAndLocation(@RequestBody MailDTO mailDTO) {
+    public ResponseDTO<Void> sendScheduleAndLocation(@RequestBody MailDTO mailDTO) {
     	List<String> attendees = mailDTO.getMailList();
     	int id_sk = mailDTO.getId_sk();
         for (String to : attendees) {
         	emailService.ScheduleLocation(to, id_sk);
         	log.info("Send mail : " + to);
         }
+        return ResponseDTO.<Void>builder().code(200).msg("gui mail thanh cong!").build();
     }
 }

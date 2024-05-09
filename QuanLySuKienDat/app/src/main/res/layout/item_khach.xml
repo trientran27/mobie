@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Hình biểu tượng người -->
+
+    <!-- Tên người dùng -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tt">
+
+        <ImageView
+            android:id="@+id/imageViewIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/person" />
+
+        <!-- Nút kiểm tra chọn -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/imageViewIcon"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/black"
+            android:text="Nguyễn Văn Nam"
+            android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textMobileKM"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="13dp"
+                android:layout_toEndOf="@id/imageViewIcon"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/black"
+                android:text="0987654321"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBoxSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tt"
+        android:gravity="center"
+        android:layout_marginTop="5dp">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="250dp"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/darker_gray" />
+    </LinearLayout>
+</RelativeLayout>

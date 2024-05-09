@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_list_search"
+        android:title="Tìm kiếm dạng danh sách" />
+    <item
+        android:id="@+id/menu_map_search"
+        android:title="Tìm kiếm trên bản đồ" />
+</menu>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QuanLySuKienDat</string>
+    <string name="timkiemdiadiemphuhop">Tìm kiếm địa điểm phù hợp</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="title_activity_maps3">MapsActivity3</string>
+    <string name="my_map">AIzaSyBSnvGFhHbEFzkP-VT9VSrl9Gq2sG4vyyY</string>
+</resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bocong"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iconduongdi4"/>
+
+        <TextView
+            android:id="@+id/tv_tendiadiem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="Tổ chức sự kiện 20 Tây Hồ"
+            android:textColor="@color/black"
+            android:textSize="22dp"/>
+    </LinearLayout>
+</LinearLayout>

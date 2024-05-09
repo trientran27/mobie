@@ -38,6 +38,9 @@ Khi thành viên muốn đóng góp thay đổi vào dự án chính, họ có t
 
 Lưu ý rằng các bước này giả định rằng bạn và các thành viên đã cài đặt Git và có kiến thức cơ bản về sử dụng nó. Đồng thời, đảm bảo các thành viên có quyền truy cập vào dự án trên GitHub. Ngoài ra có thể sử dụng gitdestop
 
+# Phần code front của hệ thống do nặng quá bởi giới hạn dung lương của Github nên sẽ up trên driver qua link: https://drive.google.com/drive/folders/1I1r8KYFlrsIeoZU_55THXXU0cLoBEXXc?usp=drive_link
+# Đề tài về chủ đề app quản lý sự 
+
 
 
 
